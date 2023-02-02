@@ -1,20 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 body {
-    background-color: #fffeff;
+    background-color: #f8fafc;
     font-family: "Poppins", sans-serif;
     padding: 2rem 1rem;
 }
 
 .row {
-    border-bottom: 1px solid rgb(216, 215, 215);
+    border-bottom: 1px solid #e5e8eb;
     padding: 0.2rem 0;
+    height: 50px;
+    justify-content: start;
+    align-items: center;
 }
 
 .custom-row-title {
     border: none;
 }
 
-.custom-table-title {
+.custom-table-title,
+.custom-total-row {
     font-weight: 600;
 }

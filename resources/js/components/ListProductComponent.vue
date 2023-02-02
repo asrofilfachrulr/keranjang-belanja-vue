@@ -5,11 +5,11 @@
         </div>
         <div class="row custom-table-title">
             <span class="col-3">Name</span>
-            <span class="col-4">Description</span>
+            <span class="col-5">Description</span>
             <span class="col-1">Stock</span>
             <span class="col-1">Price</span>            
         </div>
-        <product-row-component class="row justify-content-start align-items-center" v-for="(product, index) in products" :key="index" :product="product"></product-row-component>
+        <product-row-component class="row" v-for="(product, index) in products" :key="index" :product="product"></product-row-component>
     </div>
 </template>
 

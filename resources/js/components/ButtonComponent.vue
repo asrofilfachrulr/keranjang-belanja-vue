@@ -10,6 +10,8 @@ export default {
 
 <style>
 .btn {
+    min-width: min-content;
+    max-width: fit-content;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
     background-color: #0d6efd;

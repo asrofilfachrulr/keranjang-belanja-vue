@@ -1,16 +1,15 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row custom-row-title">
             <h2 class="col"> {{ title }} </h2>
         </div>
         <div class="row">
-            <span class="col">Name</span>
-            <span class="col">Description</span>
-            <span class="col">Stock</span>
-            <span class="col">Price</span>            
-            <div class="w-100"></div>
-            <product-row-component></product-row-component>
+            <span class="col-3">Name</span>
+            <span class="col-4">Description</span>
+            <span class="col-1">Stock</span>
+            <span class="col-1">Price</span>            
         </div>
+        <product-row-component class="row justify-content-start align-items-center" v-for="(product, index) in products" :key="index" :product="product"></product-row-component>
     </div>
 </template>
 
@@ -18,7 +17,27 @@
 export default {
     data: function() {
         return {
-            title: "Semua Produk" 
+            title: "Semua Produk",
+            products: [
+            {
+                    name: "Indomie Goreng Rendang",
+                    desc: "Masakan Instan Terenak di Dunia",
+                    stock: 10,
+                    price: 3900,
+                },
+                {
+                    name: "Mie Gelas Rendang",
+                    desc: "Masakan Instan Khusus Anak Kostan",
+                    stock: 3,
+                    price: 1500,
+                },
+                {
+                    name: "Bakmi Mewah",
+                    desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
+                    stock: 80,
+                    price: 10000,
+                },
+            ] 
         }
     }
 }

@@ -5376,7 +5376,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: "Semua Produk"
+      title: "Semua Produk",
+      products: [{
+        name: "Indomie Goreng Rendang",
+        desc: "Masakan Instan Terenak di Dunia",
+        stock: 10,
+        price: 3900
+      }, {
+        name: "Mie Gelas Rendang",
+        desc: "Masakan Instan Khusus Anak Kostan",
+        stock: 3,
+        price: 1500
+      }, {
+        name: "Bakmi Mewah",
+        desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
+        stock: 80,
+        price: 10000
+      }]
     };
   }
 });
@@ -5395,13 +5411,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      name: "Product Name",
-      desc: "This is product description",
-      stock: 99,
-      price: "Rp. 6900"
-    };
+  props: {
+    product: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
   }
 });
 
@@ -5423,7 +5439,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("button", {
-    staticClass: "btn",
+    staticClass: "btn btn-primary",
     attrs: {
       type: "button"
     }
@@ -5451,8 +5467,8 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
-  });
+    staticClass: "container-fluid"
+  }, [_c("list-product-component")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5522,24 +5538,34 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("div", {
-    staticClass: "row"
+    staticClass: "row custom-row-title"
   }, [_c("h2", {
     staticClass: "col"
-  }, [_vm._v(" " + _vm._s(_vm.title) + " ")])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("span", {
-    staticClass: "col"
-  }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
-    staticClass: "col"
-  }, [_vm._v("Description")]), _vm._v(" "), _c("span", {
-    staticClass: "col"
-  }, [_vm._v("Stock")]), _vm._v(" "), _c("span", {
-    staticClass: "col"
-  }, [_vm._v("Price")]), _vm._v(" "), _c("div", {
-    staticClass: "w-100"
-  }), _vm._v(" "), _c("product-row-component")], 1)]);
+  }, [_vm._v(" " + _vm._s(_vm.title) + " ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.products, function (product, index) {
+    return _c("product-row-component", {
+      key: index,
+      staticClass: "row justify-content-start align-items-center",
+      attrs: {
+        product: product
+      }
+    });
+  })], 2);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "row custom-table-title"
+  }, [_c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
+    staticClass: "col-4"
+  }, [_vm._v("Description")]), _vm._v(" "), _c("span", {
+    staticClass: "col-1"
+  }, [_vm._v("Stock")]), _vm._v(" "), _c("span", {
+    staticClass: "col-1"
+  }, [_vm._v("Price")])]);
+}];
 render._withStripped = true;
 
 
@@ -5561,26 +5587,28 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("span", {
-    staticClass: "col",
+    staticClass: "col-3",
     attrs: {
       id: "prod-name"
     }
-  }, [_vm._v(_vm._s(_vm.name))]), _vm._v(" "), _c("span", {
-    staticClass: "col",
+  }, [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("span", {
+    staticClass: "col-4",
     attrs: {
       id: "prod-desc"
     }
-  }, [_vm._v(_vm._s(_vm.desc))]), _vm._v(" "), _c("span", {
-    staticClass: "col",
+  }, [_vm._v(_vm._s(_vm.product.desc))]), _vm._v(" "), _c("span", {
+    staticClass: "col-1",
     attrs: {
       id: "prod-stock"
     }
-  }, [_vm._v(_vm._s(_vm.stock))]), _vm._v(" "), _c("span", {
-    staticClass: "col",
+  }, [_vm._v(_vm._s(_vm.product.stock))]), _vm._v(" "), _c("span", {
+    staticClass: "col-1",
     attrs: {
       id: "prod-price"
     }
-  }, [_vm._v(_vm._s(_vm.price))]), _vm._v(" "), _c("button-component")], 1);
+  }, [_vm._v(_vm._s(_vm.product.price))]), _vm._v(" "), _c("button-component", {
+    staticClass: "col-3"
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -10905,10 +10933,10 @@ defineJQueryPlugin(Toast);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -10922,7 +10950,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    padding: 0.5rem 0.75rem;\r\n    border-radius: 5px;\r\n    background-color: #0d6efd;\r\n    color: white;\r\n    border: none;\r\n    transition: all 0.2s ease-in-out;\n}\n.btn:active {\r\n    filter: opacity(0.75) grayscale(0.1);\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    min-width: -moz-min-content;\r\n    min-width: min-content;\r\n    max-width: -moz-fit-content;\r\n    max-width: fit-content;\r\n    padding: 0.5rem 0.75rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28230,6 +28258,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -28424,10 +28465,10 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -28437,7 +28478,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&");
 
             
 
@@ -28446,11 +28487,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -29175,7 +29216,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&");
 
 
 /***/ }),
@@ -41433,7 +41474,8 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

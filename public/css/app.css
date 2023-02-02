@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap);
 @charset "UTF-8"; /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -10819,3 +10820,22 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body {
+    background-color: #fffeff;
+    font-family: "Poppins", sans-serif;
+    padding: 2rem 1rem;
+}
+
+.row {
+    border-bottom: 1px solid rgb(216, 215, 215);
+    padding: 0.2rem 0;
+}
+
+.custom-row-title {
+    border: none;
+}
+
+.custom-table-title {
+    font-weight: 600;
+}
+

@@ -5313,7 +5313,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    btnType: {
+      type: Object,
+      "default": function _default() {
+        return {
+          text: 'Button',
+          type: 'primary'
+        };
+      }
+    }
+  },
+  computed: {
+    btnToApply: function btnToApply() {
+      return "btn-" + this.btnType.type;
+    }
+  }
+});
 
 /***/ }),
 
@@ -5343,7 +5360,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      btnTypeDel: {
+        text: "Delete",
+        type: "danger"
+      },
+      btnTypeCheckout: {
+        text: "Checkout",
+        type: "success"
+      }
+    };
+  }
+});
 
 /***/ }),
 
@@ -5418,6 +5448,14 @@ __webpack_require__.r(__webpack_exports__);
         return [];
       }
     }
+  },
+  data: function data() {
+    return {
+      btnType: {
+        text: 'Add to cart',
+        type: 'primary'
+      }
+    };
   }
 });
 
@@ -5439,11 +5477,12 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("button", {
-    staticClass: "btn btn-primary",
+    staticClass: "btn",
+    "class": _vm.btnToApply,
     attrs: {
       type: "button"
     }
-  }, [_vm._v("Add to cart")]);
+  }, [_vm._v(_vm._s(_vm.btnType.text))]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5500,9 +5539,15 @@ var render = function render() {
   }, [_vm._v("Quantity")]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
   }, [_vm._v("Price")]), _vm._v(" "), _c("button-component", {
-    staticClass: "col-3"
+    staticClass: "col-3",
+    attrs: {
+      btnType: _vm.btnTypeDel
+    }
   })], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("button-component", {
-    staticClass: "mt-3"
+    staticClass: "mt-3",
+    attrs: {
+      btnType: _vm.btnTypeCheckout
+    }
   })], 1);
 };
 var staticRenderFns = [function () {
@@ -5653,7 +5698,10 @@ var render = function render() {
       id: "prod-price"
     }
   }, [_vm._v(_vm._s(_vm.product.price))]), _vm._v(" "), _c("button-component", {
-    staticClass: "col-2"
+    staticClass: "col-2",
+    attrs: {
+      btnType: _vm.btnType
+    }
   })], 1);
 };
 var staticRenderFns = [];

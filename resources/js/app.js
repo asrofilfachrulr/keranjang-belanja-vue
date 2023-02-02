@@ -19,7 +19,13 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('cart-component', require('./components/CartComponent.vue').default);
+Vue.component('list-product-component', require('./components/ListProductComponent.vue').default);
+Vue.component('list-cart-component', require('./components/ListCartComponent.vue').default);
+Vue.component('product-row-component', require('./components/ProductRowComponent.vue').default);
+Vue.component('cart-row-component', require('./components/CartRowComponent.vue').default);
+Vue.component('button-component', require('./components/ButtonComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

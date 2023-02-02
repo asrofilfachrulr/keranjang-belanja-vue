@@ -3,7 +3,7 @@
         <div class="row custom-row-title">
             <h2 class="col"> {{ title }} </h2>
         </div>
-        <div class="row">
+        <div class="row custom-table-title">
             <span class="col-3">Name</span>
             <span class="col-4">Description</span>
             <span class="col-1">Stock</span>

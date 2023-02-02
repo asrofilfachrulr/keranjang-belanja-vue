@@ -5468,7 +5468,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container-fluid"
-  }, [_c("list-product-component")], 1);
+  }, [_c("list-product-component"), _vm._v(" "), _c("list-cart-component")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5491,9 +5491,35 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div");
+  return _c("div", [_c("div", {
+    staticClass: "row"
+  }, [_c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Quantity")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Price")]), _vm._v(" "), _c("button-component", {
+    staticClass: "col-3"
+  })], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("button-component", {
+    staticClass: "mt-3"
+  })], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "row custom-total-row"
+  }, [_c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Total:")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Rp.3000")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  })]);
+}];
 render._withStripped = true;
 
 
@@ -5514,9 +5540,29 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div");
+  return _c("div", {
+    staticClass: "mt-4"
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("cart-row-component")], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "row custom-row-title"
+  }, [_c("h2", [_vm._v("Keranjang Belanja")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "row custom-table-title"
+  }, [_c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Quantity")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Price")])]);
+}];
 render._withStripped = true;
 
 
@@ -5544,7 +5590,7 @@ var render = function render() {
   }, [_vm._v(" " + _vm._s(_vm.title) + " ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.products, function (product, index) {
     return _c("product-row-component", {
       key: index,
-      staticClass: "row justify-content-start align-items-center",
+      staticClass: "row",
       attrs: {
         product: product
       }
@@ -5559,7 +5605,7 @@ var staticRenderFns = [function () {
   }, [_c("span", {
     staticClass: "col-3"
   }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
-    staticClass: "col-4"
+    staticClass: "col-5"
   }, [_vm._v("Description")]), _vm._v(" "), _c("span", {
     staticClass: "col-1"
   }, [_vm._v("Stock")]), _vm._v(" "), _c("span", {
@@ -5592,7 +5638,7 @@ var render = function render() {
       id: "prod-name"
     }
   }, [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("span", {
-    staticClass: "col-4",
+    staticClass: "col-5",
     attrs: {
       id: "prod-desc"
     }
@@ -5607,7 +5653,7 @@ var render = function render() {
       id: "prod-price"
     }
   }, [_vm._v(_vm._s(_vm.product.price))]), _vm._v(" "), _c("button-component", {
-    staticClass: "col-3"
+    staticClass: "col-2"
   })], 1);
 };
 var staticRenderFns = [];

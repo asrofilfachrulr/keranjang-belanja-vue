@@ -1,10 +1,25 @@
 <template>
-    <button class="btn btn-primary" type="button">Add to cart</button>
+    <button class="btn" :class="btnToApply" type="button">{{ btnType.text }}</button>
 </template>
 
 <script>
 export default {
-
+    props: {
+        btnType: {
+            type: Object,
+            default: () => {
+                return {
+                    text: 'Button',
+                    type: 'primary'
+            }
+            },
+        }
+    },
+    computed: {
+        btnToApply(){
+            return "btn-"+this.btnType.type
+        }
+    }
 }
 </script>
 

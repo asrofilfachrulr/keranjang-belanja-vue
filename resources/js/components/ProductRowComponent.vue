@@ -4,7 +4,7 @@
         <span class="col-5" id="prod-desc">{{ product.desc }}</span>
         <span class="col-1" id="prod-stock">{{ product.stock }}</span>
         <span class="col-1" id="prod-price">{{ product.price }}</span>
-        <button-component class="col-2"></button-component>
+        <button-component class="col-2" :btnType="btnType"></button-component>
     </div>
 </template>
 
@@ -14,6 +14,14 @@ export default {
         product: {
             type: Array,
             default: () => [],
+        }
+    },
+    data: function() {
+        return {
+            btnType: {
+                text: 'Add to cart',
+                type: 'primary'
+            } 
         }
     }
 }

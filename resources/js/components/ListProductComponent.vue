@@ -37,7 +37,7 @@ export default {
                     stock: 80,
                     price: 10000,
                 },
-            ] 
+            ],
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" :class="btnToApply" type="button">{{ btnType.text }}</button>
+    <button @click="handleClick" class="btn" :class="btnToApply" type="button">{{ btnType.text }}</button>
 </template>
 
 <script>
@@ -10,7 +10,8 @@ export default {
             default: () => {
                 return {
                     text: 'Button',
-                    type: 'primary'
+                    type: 'primary',
+                    context: '',
             }
             },
         }
@@ -18,6 +19,11 @@ export default {
     computed: {
         btnToApply(){
             return "btn-"+this.btnType.type
+        }
+    },
+    methods: {
+        handleClick() {
+            this.$emit('click')
         }
     }
 }

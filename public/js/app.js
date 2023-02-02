@@ -5320,7 +5320,8 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return {
           text: 'Button',
-          type: 'primary'
+          type: 'primary',
+          context: ''
         };
       }
     }
@@ -5328,6 +5329,11 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     btnToApply: function btnToApply() {
       return "btn-" + this.btnType.type;
+    }
+  },
+  methods: {
+    handleClick: function handleClick() {
+      this.$emit('click');
     }
   }
 });
@@ -5345,7 +5351,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      products: [{
+        name: "Indomie Goreng Rendang",
+        desc: "Masakan Instan Terenak di Dunia",
+        stock: 10,
+        price: 3900
+      }, {
+        name: "Mie Gelas Rendang",
+        desc: "Masakan Instan Khusus Anak Kostan",
+        stock: 3,
+        price: 1500
+      }, {
+        name: "Bakmi Mewah",
+        desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
+        stock: 80,
+        price: 10000
+      }],
+      cartItems: {},
+      cartTotal: 0
+    };
+  },
+  methods: {
+    addCartItem: function addCartItem(index) {
+      var product = this.products[index];
+      if (!this.cartItems[index]) this.cartItems[index] = {
+        name: product.name,
+        qty: 1,
+        price: product.price
+      };else this.cartItems[index].qty += 1;
+      console.log(this.cartItems);
+      this.calculateTotal();
+    },
+    calculateTotal: function calculateTotal() {
+      if (this.cartItems == {}) return 0;
+      for (var index in this.cartItems) {
+        this.cartTotal += this.cartItems[index].price * this.cartItems[index].qty;
+      }
+      ;
+    }
+  }
+});
 
 /***/ }),
 
@@ -5361,17 +5409,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    item: {
+      type: Object,
+      "default": function _default() {}
+    }
+  },
   data: function data() {
     return {
       btnTypeDel: {
         text: "Delete",
         type: "danger"
-      },
-      btnTypeCheckout: {
-        text: "Checkout",
-        type: "success"
       }
     };
+  },
+  methods: {
+    delHandleClick: function delHandleClick() {
+      alert('Delete clicked');
+    }
   }
 });
 
@@ -5388,7 +5443,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    cartItems: {
+      type: Object,
+      "default": function _default() {}
+    },
+    total: {
+      type: Number,
+      "default": function _default() {
+        return 0;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      btnTypeCheckout: {
+        text: "Checkout",
+        type: "success"
+      }
+    };
+  },
+  methods: {
+    checkoutHandleClick: function checkoutHandleClick() {
+      alert("Checkout clicked");
+    }
+  }
+});
 
 /***/ }),
 
@@ -5404,26 +5485,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    products: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
   data: function data() {
     return {
-      title: "Semua Produk",
-      products: [{
-        name: "Indomie Goreng Rendang",
-        desc: "Masakan Instan Terenak di Dunia",
-        stock: 10,
-        price: 3900
-      }, {
-        name: "Mie Gelas Rendang",
-        desc: "Masakan Instan Khusus Anak Kostan",
-        stock: 3,
-        price: 1500
-      }, {
-        name: "Bakmi Mewah",
-        desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
-        stock: 80,
-        price: 10000
-      }]
+      title: "Semua Produk"
     };
+  },
+  methods: {
+    emitAdd: function emitAdd(data) {
+      this.$emit("add", data);
+    }
   }
 });
 
@@ -5443,19 +5521,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     product: {
-      type: Array,
+      type: Object,
       "default": function _default() {
         return [];
+      }
+    },
+    index: {
+      type: Number,
+      "default": function _default() {
+        return -1;
       }
     }
   },
   data: function data() {
     return {
       btnType: {
-        text: 'Add to cart',
-        type: 'primary'
+        text: "Add to cart",
+        type: "primary"
       }
     };
+  },
+  methods: {
+    handleClick: function handleClick() {
+      this.$emit('add', this.index);
+    }
   }
 });
 
@@ -5481,6 +5570,9 @@ var render = function render() {
     "class": _vm.btnToApply,
     attrs: {
       type: "button"
+    },
+    on: {
+      click: _vm.handleClick
     }
   }, [_vm._v(_vm._s(_vm.btnType.text))]);
 };
@@ -5507,7 +5599,19 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container-fluid"
-  }, [_c("list-product-component"), _vm._v(" "), _c("list-cart-component")], 1);
+  }, [_c("list-product-component", {
+    attrs: {
+      products: _vm.products
+    },
+    on: {
+      add: _vm.addCartItem
+    }
+  }), _vm._v(" "), _c("list-cart-component", {
+    attrs: {
+      cartItems: _vm.cartItems,
+      total: _vm.cartTotal
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5534,37 +5638,21 @@ var render = function render() {
     staticClass: "row"
   }, [_c("span", {
     staticClass: "col-3"
-  }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
+  }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
-  }, [_vm._v("Quantity")]), _vm._v(" "), _c("span", {
+  }, [_vm._v(_vm._s(_vm.item.qty))]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
-  }, [_vm._v("Price")]), _vm._v(" "), _c("button-component", {
+  }, [_vm._v(_vm._s(_vm.item.price))]), _vm._v(" "), _c("button-component", {
     staticClass: "col-3",
     attrs: {
       btnType: _vm.btnTypeDel
+    },
+    on: {
+      click: _vm.delHandleClick
     }
-  })], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("button-component", {
-    staticClass: "mt-3",
-    attrs: {
-      btnType: _vm.btnTypeCheckout
-    }
-  })], 1);
+  })], 1)]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "row custom-total-row"
-  }, [_c("span", {
-    staticClass: "col-3"
-  }, [_vm._v("Total:")]), _vm._v(" "), _c("span", {
-    staticClass: "col-3"
-  }), _vm._v(" "), _c("span", {
-    staticClass: "col-3"
-  }, [_vm._v("Rp.3000")]), _vm._v(" "), _c("span", {
-    staticClass: "col-3"
-  })]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -5587,7 +5675,33 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "mt-4"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("cart-row-component")], 1);
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._l(_vm.cartItems, function (item, index) {
+    return _c("div", {
+      key: index
+    }, [_c("cart-row-component", {
+      attrs: {
+        item: item
+      }
+    })], 1);
+  }), _vm._v(" "), _c("div", {
+    staticClass: "row custom-total-row"
+  }, [_c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Total:")]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  }, [_vm._v("Rp. " + _vm._s(_vm.total))]), _vm._v(" "), _c("span", {
+    staticClass: "col-3"
+  })]), _vm._v(" "), _c("button-component", {
+    staticClass: "row row-no-border mt-3",
+    attrs: {
+      btnType: _vm.btnTypeCheckout
+    },
+    on: {
+      click: _vm.checkoutHandleClick
+    }
+  })], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -5632,14 +5746,19 @@ var render = function render() {
     staticClass: "row custom-row-title"
   }, [_c("h2", {
     staticClass: "col"
-  }, [_vm._v(" " + _vm._s(_vm.title) + " ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.products, function (product, index) {
-    return _c("product-row-component", {
-      key: index,
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.products, function (product, index) {
+    return _c("div", {
+      key: index
+    }, [_c("product-row-component", {
       staticClass: "row",
       attrs: {
-        product: product
+        product: product,
+        index: index
+      },
+      on: {
+        add: _vm.emitAdd
       }
-    });
+    })], 1);
   })], 2);
 };
 var staticRenderFns = [function () {
@@ -5701,6 +5820,9 @@ var render = function render() {
     staticClass: "col-2",
     attrs: {
       btnType: _vm.btnType
+    },
+    on: {
+      click: _vm.handleClick
     }
   })], 1);
 };
@@ -11045,6 +11167,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    min-width: -moz-min-content;\r\n    min-width: min-content;\r\n    max-width: -moz-fit-content;\r\n    max-width: fit-content;\r\n    padding: 0.5rem 0.75rem;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.row-no-border {\r\n    border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28589,6 +28735,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CartRowComponent_vue_vue_type_style_index_0_id_bb199f24_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CartRowComponent_vue_vue_type_style_index_0_id_bb199f24_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CartRowComponent_vue_vue_type_style_index_0_id_bb199f24_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -28961,15 +29137,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CartRowComponent_vue_vue_type_template_id_bb199f24___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CartRowComponent.vue?vue&type=template&id=bb199f24& */ "./resources/js/components/CartRowComponent.vue?vue&type=template&id=bb199f24&");
 /* harmony import */ var _CartRowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CartRowComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CartRowComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _CartRowComponent_vue_vue_type_style_index_0_id_bb199f24_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& */ "./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _CartRowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _CartRowComponent_vue_vue_type_template_id_bb199f24___WEBPACK_IMPORTED_MODULE_0__.render,
   _CartRowComponent_vue_vue_type_template_id_bb199f24___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -29311,6 +29489,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_style_index_0_id_c59fa660_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ButtonComponent.vue?vue&type=style&index=0&id=c59fa660&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CartRowComponent_vue_vue_type_style_index_0_id_bb199f24_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CartRowComponent.vue?vue&type=style&index=0&id=bb199f24&lang=css&");
 
 
 /***/ }),

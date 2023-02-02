@@ -1,42 +1,44 @@
 <template>
     <div>
         <div class="row">
-            <span class="col-3">Name</span>
-            <span class="col-3">Quantity</span>
-            <span class="col-3">Price</span>
+            <span class="col-3">{{ item.name }}</span>
+            <span class="col-3">{{ item.qty }}</span>
+            <span class="col-3">{{ item.price }}</span>
             <button-component
                 class="col-3"
                 :btnType="btnTypeDel"
+                @click="delHandleClick"
             ></button-component>
         </div>
-        <div class="row custom-total-row">
-            <span class="col-3">Total:</span>
-            <span class="col-3"></span>
-            <span class="col-3">Rp.3000</span>
-            <span class="col-3"></span>
-        </div>
-        <button-component
-            class="mt-3"
-            :btnType="btnTypeCheckout"
-        ></button-component>
     </div>
 </template>
 
 <script>
 export default {
+    props: {
+        item: {
+            type: Object,
+            default: () => {},
+        }
+    },
     data: function () {
         return {
             btnTypeDel: {
                 text: "Delete",
                 type: "danger",
             },
-            btnTypeCheckout: {
-                text: "Checkout",
-                type: "success",
-            },
         };
     },
+    methods: {
+        delHandleClick() {
+            alert('Delete clicked');
+        },
+    }
 };
 </script>
 
-<style></style>
+<style>
+.row-no-border {
+    border: none;
+}
+</style>

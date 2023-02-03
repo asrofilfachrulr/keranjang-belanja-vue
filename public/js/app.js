@@ -5360,7 +5360,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      products: [{
+      products: Vue.observable([{
         name: "Indomie Goreng Rendang",
         desc: "Masakan Instan Terenak di Dunia",
         stock: 10,
@@ -5375,7 +5375,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
         stock: 80,
         price: 10000
-      }],
+      }]),
       cartItems: {},
       cartTotal: 0
     };
@@ -5390,11 +5390,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });else Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
         qty: this.cartItems[index].qty + 1
       }));
-
-      // this.calculateTotal();
+      Vue.set(this.products, index, _objectSpread(_objectSpread({}, this.products[index]), {}, {
+        stock: this.products[index].stock - 1
+      }));
     },
     deleteCartItem: function deleteCartItem(index) {
       console.log("catch delete event");
+      Vue.set(this.products, index, _objectSpread(_objectSpread({}, this.products[index]), {}, {
+        stock: this.cartItems[index].qty + this.products[index].stock
+      }));
       Vue["delete"](this.cartItems, index);
       console.log(this.cartItems);
     },
@@ -5573,7 +5577,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleClick: function handleClick() {
-      this.$emit('add', this.index);
+      this.$emit("add", this.index);
     }
   }
 });
@@ -5856,6 +5860,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.product.price))]), _vm._v(" "), _c("button-component", {
     staticClass: "col-2",
     attrs: {
+      disabled: _vm.product.stock <= 0,
       btnType: _vm.btnType
     },
     on: {

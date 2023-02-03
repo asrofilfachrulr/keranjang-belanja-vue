@@ -16,7 +16,7 @@
 export default {
     data: function () {
         return {
-            products: [
+            products: Vue.observable([
                 {
                     name: "Indomie Goreng Rendang",
                     desc: "Masakan Instan Terenak di Dunia",
@@ -35,7 +35,7 @@ export default {
                     stock: 80,
                     price: 10000,
                 },
-            ],
+            ]),
             cartItems: {},
             cartTotal: 0,
         };
@@ -55,10 +55,17 @@ export default {
                     qty: this.cartItems[index].qty + 1,
                 });
 
-            // this.calculateTotal();
+            Vue.set(this.products, index, {
+                ...this.products[index],
+                stock: this.products[index].stock - 1,
+            })
         },
         deleteCartItem(index) {
             console.log("catch delete event");
+            Vue.set(this.products, index, {
+                ...this.products[index],
+                stock: this.cartItems[index].qty + this.products[index].stock
+            })
             Vue.delete(this.cartItems, index);
             console.log(this.cartItems);
         },

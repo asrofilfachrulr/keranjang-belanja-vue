@@ -78,8 +78,10 @@ export default {
                 stock: this.products[index].stock + 1
             })
 
-            if(this.cartItems[index].qty == 1)
+            if(this.cartItems[index].qty == 1){
                 this.deleteCartItem(index)
+                return
+            }
 
             Vue.set(this.cartItems, index, {
                 ...this.cartItems[index],
@@ -88,19 +90,14 @@ export default {
             console.log(this.cartItems);
         },
         calculateTotal() {
-            if (this.cartItems == {}) return 0;
+            this.cartTotal = 0;
+            
+            if (Object.keys(this.cartItems).length == 0) return 0;
 
             console.log(JSON.stringify(this.cartItems));
-            this.cartTotal = 0;
             for (let index in this.cartItems) {
-                // console.log(`[before] cartTotal= ${this.cartTotal}`);
-                // console.log(
-                //     `\t${this.cartItems[index].price} * ${this.cartItems[index].qty}`
-                // );
-
                 this.cartTotal +=
                     this.cartItems[index].price * this.cartItems[index].qty;
-                // console.log(`[now] cartTotal= ${this.cartTotal}`);
             }
         },
     },

@@ -5407,28 +5407,24 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       Vue.set(this.products, index, _objectSpread(_objectSpread({}, this.products[index]), {}, {
         stock: this.products[index].stock + 1
       }));
-      if (this.cartItems[index].qty == 1) this.deleteCartItem(index);
+      if (this.cartItems[index].qty == 1) {
+        this.deleteCartItem(index);
+        return;
+      }
       Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
         qty: this.cartItems[index].qty - 1
       }));
       console.log(this.cartItems);
     },
     calculateTotal: function calculateTotal() {
-      if (this.cartItems == {}) return 0;
-      console.log(JSON.stringify(this.cartItems));
       this.cartTotal = 0;
+      if (Object.keys(this.cartItems).length == 0) return 0;
+      console.log(JSON.stringify(this.cartItems));
       for (var index in this.cartItems) {
-        // console.log(`[before] cartTotal= ${this.cartTotal}`);
-        // console.log(
-        //     `\t${this.cartItems[index].price} * ${this.cartItems[index].qty}`
-        // );
-
         this.cartTotal += this.cartItems[index].price * this.cartItems[index].qty;
-        // console.log(`[now] cartTotal= ${this.cartTotal}`);
       }
     }
   },
-
   watch: {
     cartItems: {
       handler: function handler() {

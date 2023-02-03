@@ -14,3 +14,37 @@
 ## Component Layout Design
 
 ![ComponentLayout](./ComponentLayout/VueComponentLayout.png)
+
+
+## Instructions
+
+Clone the repository first  and enter the directory
+
+```bash
+git clone https://github.com/asrofilfachrulr/keranjang-belanja-vue.git
+cd keranjang-belanja-vue
+```
+
+Then install all dependencies
+
+```bash
+npm install
+composer install
+```
+
+Last, compile the webpack and followed by enable the local server
+
+```bash
+npm run dev
+php artisan serve
+```
+
+### Versions
+
+| Tools  | version |
+| ------------- | ------------- |
+| PHP  | `7.4.29`  |
+| Composer  |  `2.5.1` |
+| Laravel/framework  | `8.75`  |
+| Node  | `v18.12.1`  |
+| NPM  |   `8.19.2`  |

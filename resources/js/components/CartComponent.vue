@@ -17,6 +17,7 @@
             :total="cartTotal"
             @delete="deleteCartItem"
             @deleteOne="deleteOneCartItem"
+            @clearAll="clearAll"
         ></list-cart-component>
     </div>
 </template>
@@ -30,7 +31,7 @@ export default {
     data: function () {
         return {
             products: Vue.observable(products.list),
-            cartItems: {},
+            cartItems: Vue.observable({}),
             cartTotal: 0,
         };
     },
@@ -87,6 +88,9 @@ export default {
             this.updateCartItemPrices(index);
 
             console.log(this.cartItems);
+        },
+        clearAll() {
+            this.cartItems = Vue.observable({});
         },
         calculateTotal() {
             this.cartTotal = 0;

@@ -23,13 +23,19 @@
             <span class="col-3">Rp. {{ total }}</span>
             <span class="col-3"></span>
         </div>
-        <button-component
-            class="row row-no-border mt-3"
-            :btnType="btnTypeCheckout"
-            @click="checkoutHandleClick"
-            data-bs-toggle="modal"
-            data-bs-target="#checkoutModal"
-        ></button-component>
+        <div class="row row-no-border mt-3">
+            <button-component
+                :btnType="btnTypeCheckout"
+                @click="checkoutHandleClick"
+                data-bs-toggle="modal"
+                data-bs-target="#checkoutModal"
+            ></button-component>
+            <button-component
+                class="ml-3"
+                :btnType="btnTypeClearAll"
+                @click="clearAllHandleClick"
+            ></button-component>
+        </div>
         <checkout-modal-component
             :cartItems="cartItems"
             :total="total"
@@ -55,6 +61,10 @@ export default {
                 text: "Checkout",
                 type: "success",
             },
+            btnTypeClearAll: {
+                text: "Clear All",
+                type: "danger",
+            },
         };
     },
     methods: {
@@ -69,6 +79,10 @@ export default {
         checkoutHandleClick() {
             // alert(`You have to pay Rp. ${this.total}`)
             console.log("checkout pressed, modal should been displayed");
+        },
+        clearAllHandleClick() {
+            console.log("emit clear all to cart");
+            this.$emit("clearAll");
         },
     },
 };

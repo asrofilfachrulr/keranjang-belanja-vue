@@ -5363,7 +5363,7 @@ console.log(products);
   data: function data() {
     return {
       products: Vue.observable(products.list),
-      cartItems: {},
+      cartItems: Vue.observable({}),
       cartTotal: 0
     };
   },
@@ -5408,6 +5408,9 @@ console.log(products);
       }));
       this.updateCartItemPrices(index);
       console.log(this.cartItems);
+    },
+    clearAll: function clearAll() {
+      this.cartItems = Vue.observable({});
     },
     calculateTotal: function calculateTotal() {
       this.cartTotal = 0;
@@ -5542,6 +5545,10 @@ __webpack_require__.r(__webpack_exports__);
       btnTypeCheckout: {
         text: "Checkout",
         type: "success"
+      },
+      btnTypeClearAll: {
+        text: "Clear All",
+        type: "danger"
       }
     };
   },
@@ -5557,6 +5564,10 @@ __webpack_require__.r(__webpack_exports__);
     checkoutHandleClick: function checkoutHandleClick() {
       // alert(`You have to pay Rp. ${this.total}`)
       console.log("checkout pressed, modal should been displayed");
+    },
+    clearAllHandleClick: function clearAllHandleClick() {
+      console.log("emit clear all to cart");
+      this.$emit("clearAll");
     }
   }
 });
@@ -5706,7 +5717,8 @@ var render = function render() {
     },
     on: {
       "delete": _vm.deleteCartItem,
-      deleteOne: _vm.deleteOneCartItem
+      deleteOne: _vm.deleteOneCartItem,
+      clearAll: _vm.clearAll
     }
   })], 1);
 };
@@ -5916,8 +5928,9 @@ var render = function render() {
     staticClass: "col-3"
   }, [_vm._v("Rp. " + _vm._s(_vm.total))]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
-  })]), _vm._v(" "), _c("button-component", {
-    staticClass: "row row-no-border mt-3",
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "row row-no-border mt-3"
+  }, [_c("button-component", {
     attrs: {
       btnType: _vm.btnTypeCheckout,
       "data-bs-toggle": "modal",
@@ -5926,7 +5939,15 @@ var render = function render() {
     on: {
       click: _vm.checkoutHandleClick
     }
-  }), _vm._v(" "), _c("checkout-modal-component", {
+  }), _vm._v(" "), _c("button-component", {
+    staticClass: "ml-3",
+    attrs: {
+      btnType: _vm.btnTypeClearAll
+    },
+    on: {
+      click: _vm.clearAllHandleClick
+    }
+  })], 1), _vm._v(" "), _c("checkout-modal-component", {
     attrs: {
       cartItems: _vm.cartItems,
       total: _vm.total

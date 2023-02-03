@@ -39,6 +39,12 @@ npm run dev
 php artisan serve
 ```
 
+Normally web server will run at port 8000
+
+```
+localhost:8000
+```
+
 ### Versions
 
 | Tools  | version |

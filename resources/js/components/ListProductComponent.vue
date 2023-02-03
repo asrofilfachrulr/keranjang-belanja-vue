@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="list-product">
         <div class="row custom-row-title">
             <h2 class="col">{{ title }}</h2>
         </div>
@@ -9,9 +9,11 @@
             <span class="col-1">Stock</span>
             <span class="col-1">Price</span>
         </div>
-        <div v-for="(product, index) in products" :key="index">
+        <div class="scrollable" id="list-product-content">
             <product-row-component
                 class="row"
+                v-for="(product, index) in products"
+                :key="index"
                 :product="product"
                 :index="index"
                 @add="emitAdd"
@@ -41,4 +43,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#list-product-content {
+    max-height: 250px;
+    min-height: 250px;
+    padding: 0.75rem 0 !important;
+}
+</style>

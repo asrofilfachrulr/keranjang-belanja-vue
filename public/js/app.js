@@ -5357,25 +5357,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var products = __webpack_require__(/*! ./_data/Products.js */ "./resources/js/components/_data/Products.js");
+console.log(products);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      products: Vue.observable([{
-        name: "Indomie Goreng Rendang",
-        desc: "Masakan Instan Terenak di Dunia",
-        stock: 10,
-        price: 3900
-      }, {
-        name: "Mie Gelas Rendang",
-        desc: "Masakan Instan Khusus Anak Kostan",
-        stock: 3,
-        price: 1500
-      }, {
-        name: "Bakmi Mewah",
-        desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
-        stock: 80,
-        price: 10000
-      }]),
+      products: Vue.observable(products.list),
       cartItems: {},
       cartTotal: 0
     };
@@ -5560,16 +5547,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteHandle: function deleteHandle(index) {
-      console.log('emit delete to cart');
+      console.log("emit delete to cart");
       this.$emit("delete", index);
     },
     deleteOneHandle: function deleteOneHandle(index) {
-      console.log('emit delete one to cart');
+      console.log("emit delete one to cart");
       this.$emit("deleteOne", index);
     },
     checkoutHandleClick: function checkoutHandleClick() {
       // alert(`You have to pay Rp. ${this.total}`)
-      console.log('checkout pressed, modal should been displayed');
+      console.log("checkout pressed, modal should been displayed");
     }
   }
 });
@@ -5704,8 +5691,8 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container-fluid"
-  }, [_c("list-product-component", {
+    staticClass: "container-xxl"
+  }, [_vm._m(0), _vm._v(" "), _c("list-product-component", {
     attrs: {
       products: _vm.products
     },
@@ -5723,7 +5710,31 @@ var render = function render() {
     }
   })], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("nav", {
+    staticStyle: {
+      "--bs-breadcrumb-divider": "'>'"
+    },
+    attrs: {
+      "aria-label": "breadcrumb"
+    }
+  }, [_c("ol", {
+    staticClass: "breadcrumb"
+  }, [_c("li", {
+    staticClass: "breadcrumb-item"
+  }, [_c("a", {
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Home")])]), _vm._v(" "), _c("li", {
+    staticClass: "breadcrumb-item active",
+    attrs: {
+      "aria-current": "page"
+    }
+  }, [_vm._v("\n                Pesanan\n            ")])])]);
+}];
 render._withStripped = true;
 
 
@@ -5881,7 +5892,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "mt-4"
+    staticClass: "mt-5"
   }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._l(_vm.cartItems, function (item, index) {
     return _c("div", {
       key: index
@@ -5961,14 +5972,22 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", {
+  return _c("div", {
+    attrs: {
+      id: "list-product"
+    }
+  }, [_c("div", {
     staticClass: "row custom-row-title"
   }, [_c("h2", {
     staticClass: "col"
-  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l(_vm.products, function (product, index) {
-    return _c("div", {
-      key: index
-    }, [_c("product-row-component", {
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "scrollable",
+    attrs: {
+      id: "list-product-content"
+    }
+  }, _vm._l(_vm.products, function (product, index) {
+    return _c("product-row-component", {
+      key: index,
       staticClass: "row",
       attrs: {
         product: product,
@@ -5977,8 +5996,8 @@ var render = function render() {
       on: {
         add: _vm.emitAdd
       }
-    })], 1);
-  })], 2);
+    });
+  }), 1)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -6136,6 +6155,56 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/_data/Products.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/_data/Products.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "list": () => (/* binding */ list)
+/* harmony export */ });
+var list = [{
+  name: "Indomie Goreng Rendang",
+  desc: "Masakan Instan Terenak di Dunia",
+  stock: 10,
+  price: 3900
+}, {
+  name: "Mie Gelas Rendang",
+  desc: "Masakan Instan Khusus Anak Kostan",
+  stock: 3,
+  price: 1500
+}, {
+  name: "Bakmi Mewah",
+  desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
+  stock: 80,
+  price: 10000
+}, {
+  name: "Sarden BCA",
+  desc: "Makan Ikan biar Ganteng",
+  stock: 15,
+  price: 7300
+}, {
+  name: "Mixsuek",
+  desc: "Ice Cream Republik Rakyat wiuwiuwiu",
+  stock: 12381,
+  price: 5000
+}, {
+  name: "Smashed Chicken",
+  desc: "Makanan kebangsaan mahasiswa/i seantero negeri",
+  stock: 49,
+  price: 12000
+}, {
+  name: "Setarmas Hot Americano Gula Aren plus Troffle",
+  desc: "Minuman kopi pengguna nMac dan iSiteru",
+  stock: 13,
+  price: 31000
+}];
 
 /***/ }),
 
@@ -11435,6 +11504,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#checkout-item-name {\r\n    font-weight: 500;\r\n    min-width: 12rem;\r\n    max-width: 12rem;\n}\n#checkout-item-qty {\r\n    min-width: 2rem;\r\n    max-width: 2rem;\r\n    -webkit-margin-start: 1rem;\r\n            margin-inline-start: 1rem;\n}\n#checkout-item-price {\r\n    min-width: 6rem;\r\n    max-width: 6rem;\r\n    text-align: end;\n}\n#checkout-item-price,\r\n#checkout-total-price {\r\n    font-weight: 600;\n}\n#flex-total {\r\n    gap: 1.5rem;\n}\n#checkout-total-price {\r\n    border-top: 1px dashed #7c7d7e;\r\n    padding-top: 1rem;\r\n    /* border-style: ; */\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n#list-product-content {\r\n    max-height: 250px;\r\n    min-height: 250px;\r\n    padding: 0.75rem 0 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29039,6 +29132,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListProductComponent_vue_vue_type_style_index_0_id_53175f12_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListProductComponent_vue_vue_type_style_index_0_id_53175f12_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListProductComponent_vue_vue_type_style_index_0_id_53175f12_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -29532,15 +29655,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ListProductComponent_vue_vue_type_template_id_53175f12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListProductComponent.vue?vue&type=template&id=53175f12& */ "./resources/js/components/ListProductComponent.vue?vue&type=template&id=53175f12&");
 /* harmony import */ var _ListProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListProductComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ListProductComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ListProductComponent_vue_vue_type_style_index_0_id_53175f12_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& */ "./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ListProductComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ListProductComponent_vue_vue_type_template_id_53175f12___WEBPACK_IMPORTED_MODULE_0__.render,
   _ListProductComponent_vue_vue_type_template_id_53175f12___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -29863,6 +29988,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckoutModalComponent_vue_vue_type_style_index_0_id_bdcc8e3e_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CheckoutModalComponent.vue?vue&type=style&index=0&id=bdcc8e3e&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CheckoutModalComponent.vue?vue&type=style&index=0&id=bdcc8e3e&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListProductComponent_vue_vue_type_style_index_0_id_53175f12_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ListProductComponent.vue?vue&type=style&index=0&id=53175f12&lang=css&");
 
 
 /***/ }),

@@ -6,10 +6,11 @@
         <div class="row custom-table-title">
             <span class="col-3">Name</span>
             <span class="col-3">Quantity</span>
-            <span class="col-3">Price</span>
+            <span class="col-2">Price</span>
         </div>
         <div v-for="(item, index) in cartItems" :key="index">
-            <cart-row-component :item="item" :index="index" @delete="deleteHandleClick"> </cart-row-component>
+            <cart-row-component :item="item" :index="index" @delete="deleteHandle"
+            @deleteOne="deleteOneHandle"> </cart-row-component>
         </div>
         <div class="row custom-total-row">
             <span class="col-3">Total:</span>
@@ -46,9 +47,13 @@ export default {
         };
     },
     methods: {
-        deleteHandleClick(index) {
+        deleteHandle(index) {
             console.log('emit delete to cart')
             this.$emit("delete", index);
+        },
+        deleteOneHandle(index) {
+            console.log('emit delete one to cart')
+            this.$emit("deleteOne", index);
         },
         checkoutHandleClick() {
             alert(`You have to pay Rp. ${this.total}`)

@@ -1,5 +1,5 @@
 <template>
-    <button @click="handleClick" class="btn" :class="btnToApply" type="button">{{ btnType.text }}</button>
+    <button @click="handleClick" class="btn" :class="btnToApply" type="button" v-html="btnType.text"></button>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
                     context: '',
             }
             },
-        }
+        },
     },
     computed: {
         btnToApply(){

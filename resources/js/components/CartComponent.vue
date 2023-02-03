@@ -8,6 +8,7 @@
             :cartItems="cartItems"
             :total="cartTotal"
             @delete="deleteCartItem"
+            @deleteOne="deleteOneCartItem"
         ></list-cart-component>
     </div>
 </template>
@@ -67,6 +68,23 @@ export default {
                 stock: this.cartItems[index].qty + this.products[index].stock
             })
             Vue.delete(this.cartItems, index);
+            console.log(this.cartItems);
+        },
+        deleteOneCartItem(index) {
+            console.log("catch delete one event");
+
+            Vue.set(this.products, index, {
+                ...this.products[index],
+                stock: this.products[index].stock + 1
+            })
+
+            if(this.cartItems[index].qty == 1)
+                this.deleteCartItem(index)
+
+            Vue.set(this.cartItems, index, {
+                ...this.cartItems[index],
+                qty: this.cartItems[index].qty - 1
+            })
             console.log(this.cartItems);
         },
         calculateTotal() {

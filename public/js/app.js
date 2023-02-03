@@ -5402,6 +5402,17 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       Vue["delete"](this.cartItems, index);
       console.log(this.cartItems);
     },
+    deleteOneCartItem: function deleteOneCartItem(index) {
+      console.log("catch delete one event");
+      Vue.set(this.products, index, _objectSpread(_objectSpread({}, this.products[index]), {}, {
+        stock: this.products[index].stock + 1
+      }));
+      if (this.cartItems[index].qty == 1) this.deleteCartItem(index);
+      Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
+        qty: this.cartItems[index].qty - 1
+      }));
+      console.log(this.cartItems);
+    },
     calculateTotal: function calculateTotal() {
       if (this.cartItems == {}) return 0;
       console.log(JSON.stringify(this.cartItems));
@@ -5443,19 +5454,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['item', 'index'],
+  props: ["item", "index"],
   data: function data() {
     return {
       btnTypeDel: {
         text: "Delete",
         type: "danger"
+      },
+      btnTypeDelOne: {
+        text: 'Reduce',
+        type: "outline-danger"
       }
     };
   },
   methods: {
     delHandleClick: function delHandleClick() {
-      console.log('emit delete to ListCart');
-      this.$emit('delete', this.index);
+      console.log("emit delete to ListCart");
+      this.$emit("delete", this.index);
+    },
+    delOneHandleClick: function delOneHandleClick() {
+      console.log("emit delete one to ListCart");
+      this.$emit("deleteOne", this.index);
     }
   }
 });
@@ -5495,9 +5514,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    deleteHandleClick: function deleteHandleClick(index) {
+    deleteHandle: function deleteHandle(index) {
       console.log('emit delete to cart');
       this.$emit("delete", index);
+    },
+    deleteOneHandle: function deleteOneHandle(index) {
+      console.log('emit delete one to cart');
+      this.$emit("deleteOne", index);
     },
     checkoutHandleClick: function checkoutHandleClick() {
       alert("You have to pay Rp. ".concat(this.total));
@@ -5605,10 +5628,13 @@ var render = function render() {
     attrs: {
       type: "button"
     },
+    domProps: {
+      innerHTML: _vm._s(_vm.btnType.text)
+    },
     on: {
       click: _vm.handleClick
     }
-  }, [_vm._v(_vm._s(_vm.btnType.text))]);
+  });
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5646,7 +5672,8 @@ var render = function render() {
       total: _vm.cartTotal
     },
     on: {
-      "delete": _vm.deleteCartItem
+      "delete": _vm.deleteCartItem,
+      deleteOne: _vm.deleteOneCartItem
     }
   })], 1);
 };
@@ -5678,9 +5705,16 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
   }, [_vm._v(_vm._s(_vm.item.qty))]), _vm._v(" "), _c("span", {
-    staticClass: "col-3"
+    staticClass: "col-2"
   }, [_vm._v(_vm._s(_vm.item.price))]), _vm._v(" "), _c("button-component", {
-    staticClass: "col-3",
+    staticClass: "mr-3",
+    attrs: {
+      btnType: _vm.btnTypeDelOne
+    },
+    on: {
+      click: _vm.delOneHandleClick
+    }
+  }), _vm._v(" "), _c("button-component", {
     attrs: {
       btnType: _vm.btnTypeDel
     },
@@ -5721,7 +5755,8 @@ var render = function render() {
         index: index
       },
       on: {
-        "delete": _vm.deleteHandleClick
+        "delete": _vm.deleteHandle,
+        deleteOne: _vm.deleteOneHandle
       }
     })], 1);
   }), _vm._v(" "), _c("div", {
@@ -5760,7 +5795,7 @@ var staticRenderFns = [function () {
   }, [_vm._v("Name")]), _vm._v(" "), _c("span", {
     staticClass: "col-3"
   }, [_vm._v("Quantity")]), _vm._v(" "), _c("span", {
-    staticClass: "col-3"
+    staticClass: "col-2"
   }, [_vm._v("Price")])]);
 }];
 render._withStripped = true;
@@ -5858,7 +5893,6 @@ var render = function render() {
       id: "prod-price"
     }
   }, [_vm._v(_vm._s(_vm.product.price))]), _vm._v(" "), _c("button-component", {
-    staticClass: "col-2",
     attrs: {
       disabled: _vm.product.stock <= 0,
       btnType: _vm.btnType

@@ -7,7 +7,6 @@
         <button-component
             v-bind:disabled="product.stock <= 0"
             @click="handleClick"
-            class="col-2"
             :btnType="btnType"
         ></button-component>
     </div>

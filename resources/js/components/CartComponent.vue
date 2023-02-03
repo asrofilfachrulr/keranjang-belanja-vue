@@ -60,16 +60,13 @@ export default {
         },
         deleteCartItem(index) {
             console.log("catch delete event");
-            Vue.set(this.products, index, {
-                ...this.products[index],
-                stock: this.cartItems[index].qty + this.products[index].stock,
-            });
+            this.resetStockProduct(index);
             Vue.delete(this.cartItems, index);
-            console.log(this.cartItems);
         },
         deleteOneCartItem(index) {
             console.log("catch delete one event");
 
+            // restock
             Vue.set(this.products, index, {
                 ...this.products[index],
                 stock: this.products[index].stock + 1,
@@ -90,7 +87,9 @@ export default {
             console.log(this.cartItems);
         },
         clearAll() {
-            this.cartItems = Vue.observable({});
+            Object.keys(this.cartItems).forEach((index) => {
+                this.deleteCartItem(index);
+            });
         },
         calculateTotal() {
             this.cartTotal = 0;
@@ -106,6 +105,12 @@ export default {
             Vue.set(this.cartItems, index, {
                 ...this.cartItems[index],
                 price: this.products[index].price * this.cartItems[index].qty,
+            });
+        },
+        resetStockProduct(index) {
+            Vue.set(this.products, index, {
+                ...this.products[index],
+                stock: this.cartItems[index].qty + this.products[index].stock,
             });
         },
     },

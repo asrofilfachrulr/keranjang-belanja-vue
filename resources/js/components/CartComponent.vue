@@ -7,6 +7,7 @@
         <list-cart-component
             :cartItems="cartItems"
             :total="cartTotal"
+            @delete="deleteCartItem"
         ></list-cart-component>
     </div>
 </template>
@@ -43,21 +44,48 @@ export default {
         addCartItem(index) {
             let product = this.products[index];
             if (!this.cartItems[index])
-                this.cartItems[index] = {
+                Vue.set(this.cartItems, index, {
                     name: product.name,
                     qty: 1,
                     price: product.price,
-                };
-            else this.cartItems[index].qty += 1;
-            console.log(this.cartItems)
-            this.calculateTotal();
+                });
+            else
+                Vue.set(this.cartItems, index, {
+                    ...this.cartItems[index],
+                    qty: this.cartItems[index].qty + 1,
+                });
+
+            // this.calculateTotal();
+        },
+        deleteCartItem(index) {
+            console.log("catch delete event");
+            Vue.delete(this.cartItems, index);
+            console.log(this.cartItems);
         },
         calculateTotal() {
             if (this.cartItems == {}) return 0;
 
-            for(let index in this.cartItems){
-                this.cartTotal += this.cartItems[index].price * this.cartItems[index].qty;
-            };
+            console.log(JSON.stringify(this.cartItems));
+            this.cartTotal = 0;
+            for (let index in this.cartItems) {
+                // console.log(`[before] cartTotal= ${this.cartTotal}`);
+                // console.log(
+                //     `\t${this.cartItems[index].price} * ${this.cartItems[index].qty}`
+                // );
+
+                this.cartTotal +=
+                    this.cartItems[index].price * this.cartItems[index].qty;
+                // console.log(`[now] cartTotal= ${this.cartTotal}`);
+            }
+        },
+    },
+    watch: {
+        cartItems: {
+            handler() {
+                console.log("calculating new total..");
+                this.calculateTotal();
+            },
+            deep: true,
         },
     },
 };

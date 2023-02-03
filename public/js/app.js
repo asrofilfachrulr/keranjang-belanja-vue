@@ -5351,6 +5351,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5377,20 +5383,44 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addCartItem: function addCartItem(index) {
       var product = this.products[index];
-      if (!this.cartItems[index]) this.cartItems[index] = {
+      if (!this.cartItems[index]) Vue.set(this.cartItems, index, {
         name: product.name,
         qty: 1,
         price: product.price
-      };else this.cartItems[index].qty += 1;
+      });else Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
+        qty: this.cartItems[index].qty + 1
+      }));
+
+      // this.calculateTotal();
+    },
+    deleteCartItem: function deleteCartItem(index) {
+      console.log("catch delete event");
+      Vue["delete"](this.cartItems, index);
       console.log(this.cartItems);
-      this.calculateTotal();
     },
     calculateTotal: function calculateTotal() {
       if (this.cartItems == {}) return 0;
+      console.log(JSON.stringify(this.cartItems));
+      this.cartTotal = 0;
       for (var index in this.cartItems) {
+        // console.log(`[before] cartTotal= ${this.cartTotal}`);
+        // console.log(
+        //     `\t${this.cartItems[index].price} * ${this.cartItems[index].qty}`
+        // );
+
         this.cartTotal += this.cartItems[index].price * this.cartItems[index].qty;
+        // console.log(`[now] cartTotal= ${this.cartTotal}`);
       }
-      ;
+    }
+  },
+
+  watch: {
+    cartItems: {
+      handler: function handler() {
+        console.log("calculating new total..");
+        this.calculateTotal();
+      },
+      deep: true
     }
   }
 });
@@ -5409,12 +5439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    item: {
-      type: Object,
-      "default": function _default() {}
-    }
-  },
+  props: ['item', 'index'],
   data: function data() {
     return {
       btnTypeDel: {
@@ -5425,7 +5450,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     delHandleClick: function delHandleClick() {
-      alert('Delete clicked');
+      console.log('emit delete to ListCart');
+      this.$emit('delete', this.index);
     }
   }
 });
@@ -5465,8 +5491,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    deleteHandleClick: function deleteHandleClick(index) {
+      console.log('emit delete to cart');
+      this.$emit("delete", index);
+    },
     checkoutHandleClick: function checkoutHandleClick() {
-      alert("Checkout clicked");
+      alert("You have to pay Rp. ".concat(this.total));
     }
   }
 });
@@ -5610,6 +5640,9 @@ var render = function render() {
     attrs: {
       cartItems: _vm.cartItems,
       total: _vm.cartTotal
+    },
+    on: {
+      "delete": _vm.deleteCartItem
     }
   })], 1);
 };
@@ -5680,7 +5713,11 @@ var render = function render() {
       key: index
     }, [_c("cart-row-component", {
       attrs: {
-        item: item
+        item: item,
+        index: index
+      },
+      on: {
+        "delete": _vm.deleteHandleClick
       }
     })], 1);
   }), _vm._v(" "), _c("div", {

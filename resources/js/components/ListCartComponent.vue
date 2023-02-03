@@ -9,7 +9,7 @@
             <span class="col-3">Price</span>
         </div>
         <div v-for="(item, index) in cartItems" :key="index">
-            <cart-row-component :item="item"></cart-row-component>
+            <cart-row-component :item="item" :index="index" @delete="deleteHandleClick"> </cart-row-component>
         </div>
         <div class="row custom-total-row">
             <span class="col-3">Total:</span>
@@ -35,7 +35,7 @@ export default {
         total: {
             type: Number,
             default: () => 0,
-        }
+        },
     },
     data: function () {
         return {
@@ -46,9 +46,13 @@ export default {
         };
     },
     methods: {
-        checkoutHandleClick() {
-            alert("Checkout clicked");
+        deleteHandleClick(index) {
+            console.log('emit delete to cart')
+            this.$emit("delete", index);
         },
+        checkoutHandleClick() {
+            alert(`You have to pay Rp. ${this.total}`)
+        }
     },
 };
 </script>

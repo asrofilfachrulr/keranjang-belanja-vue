@@ -15,12 +15,7 @@
 
 <script>
 export default {
-    props: {
-        item: {
-            type: Object,
-            default: () => {},
-        }
-    },
+    props: ['item', 'index'],
     data: function () {
         return {
             btnTypeDel: {
@@ -31,7 +26,8 @@ export default {
     },
     methods: {
         delHandleClick() {
-            alert('Delete clicked');
+            console.log('emit delete to ListCart')
+            this.$emit('delete', this.index)
         },
     }
 };

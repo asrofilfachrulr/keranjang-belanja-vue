@@ -1,15 +1,8 @@
 <template>
     <div class="container-fluid">
-        <list-product-component
-            :products="products"
-            @add="addCartItem"
-        ></list-product-component>
-        <list-cart-component
-            :cartItems="cartItems"
-            :total="cartTotal"
-            @delete="deleteCartItem"
-            @deleteOne="deleteOneCartItem"
-        ></list-cart-component>
+        <list-product-component :products="products" @add="addCartItem"></list-product-component>
+        <list-cart-component :cartItems="cartItems" :total="cartTotal" @delete="deleteCartItem"
+            @deleteOne="deleteOneCartItem"></list-cart-component>
     </div>
 </template>
 
@@ -50,12 +43,16 @@ export default {
                     qty: 1,
                     price: product.price,
                 });
-            else
+            else {
                 Vue.set(this.cartItems, index, {
                     ...this.cartItems[index],
                     qty: this.cartItems[index].qty + 1,
                 });
+                this.updateCartItemPrices(index)
+            }
 
+
+            // reduce stock
             Vue.set(this.products, index, {
                 ...this.products[index],
                 stock: this.products[index].stock - 1,
@@ -78,8 +75,8 @@ export default {
                 stock: this.products[index].stock + 1
             })
 
-            if(this.cartItems[index].qty == 1){
-                this.deleteCartItem(index)
+            if (this.cartItems[index].qty == 1) {
+                Vue.delete(this.cartItems, index);
                 return
             }
 
@@ -87,19 +84,27 @@ export default {
                 ...this.cartItems[index],
                 qty: this.cartItems[index].qty - 1
             })
+
+            this.updateCartItemPrices(index)
+
             console.log(this.cartItems);
         },
         calculateTotal() {
             this.cartTotal = 0;
-            
+
             if (Object.keys(this.cartItems).length == 0) return 0;
 
             console.log(JSON.stringify(this.cartItems));
             for (let index in this.cartItems) {
-                this.cartTotal +=
-                    this.cartItems[index].price * this.cartItems[index].qty;
+                this.cartTotal += this.cartItems[index].price
             }
         },
+        updateCartItemPrices(index) {
+            Vue.set(this.cartItems, index, {
+                ...this.cartItems[index],
+                price: (this.products[index].price) * this.cartItems[index].qty,
+            })
+        }
     },
     watch: {
         cartItems: {
@@ -113,4 +118,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

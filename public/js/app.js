@@ -5387,9 +5387,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         name: product.name,
         qty: 1,
         price: product.price
-      });else Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
-        qty: this.cartItems[index].qty + 1
-      }));
+      });else {
+        Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
+          qty: this.cartItems[index].qty + 1
+        }));
+        this.updateCartItemPrices(index);
+      }
+
+      // reduce stock
       Vue.set(this.products, index, _objectSpread(_objectSpread({}, this.products[index]), {}, {
         stock: this.products[index].stock - 1
       }));
@@ -5408,12 +5413,13 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         stock: this.products[index].stock + 1
       }));
       if (this.cartItems[index].qty == 1) {
-        this.deleteCartItem(index);
+        Vue["delete"](this.cartItems, index);
         return;
       }
       Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
         qty: this.cartItems[index].qty - 1
       }));
+      this.updateCartItemPrices(index);
       console.log(this.cartItems);
     },
     calculateTotal: function calculateTotal() {
@@ -5421,8 +5427,13 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       if (Object.keys(this.cartItems).length == 0) return 0;
       console.log(JSON.stringify(this.cartItems));
       for (var index in this.cartItems) {
-        this.cartTotal += this.cartItems[index].price * this.cartItems[index].qty;
+        this.cartTotal += this.cartItems[index].price;
       }
+    },
+    updateCartItemPrices: function updateCartItemPrices(index) {
+      Vue.set(this.cartItems, index, _objectSpread(_objectSpread({}, this.cartItems[index]), {}, {
+        price: this.products[index].price * this.cartItems[index].qty
+      }));
     }
   },
   watch: {

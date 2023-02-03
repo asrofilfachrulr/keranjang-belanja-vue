@@ -22,7 +22,10 @@
             class="row row-no-border mt-3"
             :btnType="btnTypeCheckout"
             @click="checkoutHandleClick"
+            data-bs-toggle="modal" 
+            data-bs-target="#checkoutModal"
         ></button-component>
+        <checkout-modal-component :cartItems="cartItems" :total="total"></checkout-modal-component>
     </div>
 </template>
 
@@ -56,7 +59,8 @@ export default {
             this.$emit("deleteOne", index);
         },
         checkoutHandleClick() {
-            alert(`You have to pay Rp. ${this.total}`)
+            // alert(`You have to pay Rp. ${this.total}`)
+            console.log('checkout pressed, modal should been displayed')
         }
     },
 };

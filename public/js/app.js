@@ -6215,12 +6215,12 @@ var list = [{
 }, {
   name: "Sarden BCA",
   desc: "Makan Ikan biar Ganteng",
-  stock: 15,
+  stock: 7,
   price: 7300
 }, {
   name: "Mixsuek",
   desc: "Ice Cream Republik Rakyat wiuwiuwiu",
-  stock: 12381,
+  stock: 5,
   price: 5000
 }, {
   name: "Smashed Chicken",

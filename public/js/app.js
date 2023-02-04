@@ -6517,9 +6517,18 @@ var render = function render() {
     attrs: {
       id: "order-id"
     }
-  }, [_vm._v("\n        code - "), _c("span", [_vm._v(_vm._s(_vm.bodyData.id))])]), _vm._v(" "), _c("p", [_vm._v("Show this QRcode to Cashier to proceed your checkout")])]);
+  }, [_vm._v("\n        code - "), _c("span", [_vm._v(_vm._s(_vm.bodyData.id))])]), _vm._v(" "), _vm._m(0)]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("p", [_vm._v("\n        Show this QRcode to Cashier to proceed your checkout "), _c("br"), _vm._v(" "), _c("span", {
+    staticStyle: {
+      "font-size": "0.75rem",
+      "font-weight": "200"
+    }
+  }, [_c("i", [_vm._v("cart has been reset..")])])]);
+}];
 render._withStripped = true;
 
 

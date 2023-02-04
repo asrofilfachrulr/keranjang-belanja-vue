@@ -7,7 +7,12 @@
         <p id="order-id">
             code - <span>{{ bodyData.id }}</span>
         </p>
-        <p>Show this QRcode to Cashier to proceed your checkout</p>
+        <p>
+            Show this QRcode to Cashier to proceed your checkout <br />
+            <span style="font-size: 0.75rem; font-weight: 200"
+                ><i>cart has been reset..</i></span
+            >
+        </p>
     </div>
 </template>
 

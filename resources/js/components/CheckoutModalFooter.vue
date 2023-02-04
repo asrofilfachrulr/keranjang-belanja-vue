@@ -20,11 +20,22 @@ export default {
     },
     methods: {
         handlePrintClick() {
-            alert(
-                `Your order has been registered by ID ${
-                    Math.floor(Math.random() * 1000) + "-" + Date.now()
-                }, Please wait a waiter/ess comes to you`
-            );
+            const id = this.generateRandomString(10);
+            console.log(`id: ${id}`);
+            this.$emit("actionClick", id);
+        },
+        generateRandomString(n) {
+            let text = "";
+            let possible =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for (let i = 0; i < n; i++) {
+                text += possible.charAt(
+                    Math.floor(Math.random() * possible.length)
+                );
+            }
+
+            return text;
         },
     },
 };

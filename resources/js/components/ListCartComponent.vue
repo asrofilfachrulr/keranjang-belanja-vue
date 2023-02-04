@@ -28,7 +28,7 @@
                 :btnType="btnTypeCheckout"
                 @click="checkoutHandleClick"
                 data-bs-toggle="modal"
-                :data-bs-target="'#' + modalId"
+                :data-bs-target="'#' + checkoutModalId"
             ></button-component>
             <button-component
                 class="ml-3"
@@ -37,15 +37,26 @@
             ></button-component>
         </div>
         <centered-modal
-            :modalId="modalId"
+            :modalId="checkoutModalId"
             :bodyData="{
                 cartItems,
                 total,
             }"
-            :componentBody="componentBody"
-            :componentFooter="componentFooter"
+            :componentBody="checkoutComponentBody"
+            :componentFooter="checkoutComponentFooter"
             :modalTitle="'Checkout'"
-            :btnTypes="btnTypesModal"
+            :btnTypes="checkoutBtnTypesModal"
+            @actionClick="checkoutActionClickHandle"
+        ></centered-modal>
+        <centered-modal
+            :modalId="resetModalId"
+            :bodyData="{
+                id: orderId,
+            }"
+            :componentBody="resetComponentBody"
+            :componentFooter="resetComponentFooter"
+            :modalTitle="'Checkout Done'"
+            :btnTypes="resetBtnTypesModal"
         ></centered-modal>
     </div>
 </template>
@@ -53,6 +64,8 @@
 <script>
 import CheckoutModalContent from "./CheckoutModalContent.vue";
 import CheckoutModalFooterVue from "./CheckoutModalFooter.vue";
+import ResetModalContent from "./ResetModalContent.vue";
+import ResetModalFooter from "./ResetModalFooter.vue";
 
 export default {
     props: {
@@ -75,10 +88,13 @@ export default {
                 text: "Clear All",
                 type: "danger",
             },
-            componentBody: CheckoutModalContent,
-            componentFooter: CheckoutModalFooterVue,
-            modalId: "checkoutModal",
-            btnTypesModal: {
+            checkoutComponentBody: CheckoutModalContent,
+            checkoutComponentFooter: CheckoutModalFooterVue,
+            resetComponentBody: ResetModalContent,
+            resetComponentFooter: ResetModalFooter,
+            checkoutModalId: "checkoutModal",
+            resetModalId: "resetModal",
+            checkoutBtnTypesModal: {
                 Cancel: {
                     text: "Cancel",
                     type: "secondary",
@@ -88,6 +104,13 @@ export default {
                     type: "primary",
                 },
             },
+            resetBtnTypesModal: {
+                OK: {
+                    text: "Okay",
+                    type: "primary",
+                },
+            },
+            orderId: "",
         };
     },
     methods: {
@@ -106,6 +129,25 @@ export default {
         clearAllHandleClick() {
             console.log("emit clear all to cart");
             this.$emit("clearAll");
+        },
+        checkoutActionClickHandle(id) {
+            this.orderId = id;
+            // toggle reset modal
+            $("#" + this.resetModalId).modal("toggle");
+            console.log(`generating qrcode with id ${id}`);
+
+            var qr = qrcode(4, "H");
+            qr.addData(id);
+            qr.make();
+            var svg = qr.createSvgTag(4, 4);
+
+            document.getElementById("qrcode-container").innerHTML = svg;
+
+            document.getElementById(
+                "qrcode-container"
+            ).children[0].style.transform = "scale(1.25)";
+            // clear all cart
+            this.clearAllHandleClick();
         },
     },
 };

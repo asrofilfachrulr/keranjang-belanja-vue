@@ -20,16 +20,34 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Root
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
+
+// Products
 Vue.component('list-product-component', require('./components/ListProductComponent.vue').default);
-Vue.component('list-cart-component', require('./components/ListCartComponent.vue').default);
 Vue.component('product-row-component', require('./components/ProductRowComponent.vue').default);
+
+// Carts
+Vue.component('list-cart-component', require('./components/ListCartComponent.vue').default);
 Vue.component('cart-row-component', require('./components/CartRowComponent.vue').default);
+
+// Modal
 Vue.component('centered-modal', require('./components/CenteredModal.vue').default);
+
+// Checkout Modal
 Vue.component('checkout-modal-content', require('./components/CheckoutModalContent.vue').default);
+Vue.component('checkout-modal-footer', require('./components/ProductModalFooter.vue').default);
+
+// Product Modal
 Vue.component('product-modal-content', require('./components/ProductModalContent.vue').default);
 Vue.component('product-modal-footer', require('./components/ProductModalFooter.vue').default);
-Vue.component('checkout-modal-footer', require('./components/ProductModalFooter.vue').default);
+
+// Reset Modal
+Vue.component('reset-modal-content', require('./components/ResetModalContent.vue').default);
+Vue.component('reset-modal-footer', require('./components/ResetModalFooter.vue').default);
+
+
+// Button
 Vue.component('button-component', require('./components/ButtonComponent.vue').default);
 
 /**

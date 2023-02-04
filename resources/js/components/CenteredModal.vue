@@ -24,6 +24,7 @@
                         :is="componentFooter"
                         :footerData="footerData"
                         :btnTypes="btnTypes"
+                        @actionClick="actionClick"
                     ></component>
                 </div>
             </div>
@@ -60,6 +61,11 @@ export default {
         btnTypes: {
             type: Object,
             required: true,
+        },
+    },
+    methods: {
+        actionClick(data) {
+            this.$emit("actionClick", data);
         },
     },
 };

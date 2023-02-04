@@ -6155,7 +6155,10 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "d-flex flex-column justify-content-center"
+    staticClass: "d-flex flex-column justify-content-center",
+    attrs: {
+      id: "productmodalcontent"
+    }
   }, [_c("img", {
     attrs: {
       id: "modal-product-img",
@@ -6165,8 +6168,11 @@ var render = function render() {
   }), _vm._v(" "), _c("p", {
     attrs: {
       id: "modal-product-desc"
+    },
+    domProps: {
+      innerHTML: _vm._s(_vm.bodyData.desc)
     }
-  }, [_vm._v(_vm._s(_vm.bodyData.desc))])]);
+  })]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -6229,7 +6235,7 @@ var render = function render() {
     attrs: {
       bodyData: {
         src: _vm.product.src,
-        desc: _vm.product.desc
+        desc: _vm.product.longDesc
       },
       componentProp: _vm.componentProp,
       modalTitle: _vm.product.name,
@@ -6348,44 +6354,51 @@ var BASE_DIR_IMAGE = '/images/';
 var list = [{
   name: "Indomie Goreng Rendang",
   desc: "Masakan Instan Terenak di Dunia",
+  longDesc: "Indomie Goreng rasa Rendang 3000.an dengan berbagai topping:<br>- potongan daging Wagyu A6 A6 joz<br>- tamago (telur, --jepang)<br>- Cabbage (kubis, --jaksel)<br>- chili slices (artiin sendiri)",
   stock: 10,
   price: 3900,
   src: BASE_DIR_IMAGE + "indomie-rendang.jpg"
 }, {
   name: "Mie Gelas Rendang",
   desc: "Masakan Instan Khusus Anak Kostan",
+  longDesc: "Mie homemade icik iwir disajikan dalam gelas (cup) rasa bumbu rendang asli, pedas dengan topping:<br>-ayam suwir<br>- saus padang<br>- potongan cabe<br>- bawang goreng",
   stock: 3,
   price: 1500,
   src: BASE_DIR_IMAGE + "mie-gelas.jpg"
 }, {
   name: "Bakmi Mewah",
   desc: "Kalau Anak Kosan Jangan Macem-Macem Deh",
+  longDesc: "Bakmi mewah dua bungkus dicampur dengan bumbu rahasia (gimmick) beserta topping<br>- dried meatball<br>- nori",
   stock: 80,
   price: 10000,
   src: BASE_DIR_IMAGE + "bakmi-mewah.jpg"
 }, {
   name: "Sarden BCA",
-  desc: "Makan Ikan biar Ganteng",
+  desc: "Makan Ikan biar Lulus Bootcamp Inosoft",
+  longDesc: "Sarden kaleng(an) disajikan (di piring, dimana lagi? kamu nanyea?) dengan tumis lobak dan ekstra saus tomat rahasia (gimmick juga)",
   stock: 7,
   price: 7300,
   src: BASE_DIR_IMAGE + "sarden-bca.jpg"
 }, {
   name: "Mixsuek",
-  desc: "Ice Cream Republik Rakyat wiuwiuwiu",
+  desc: "Ice Cream Republik Rakyat Pancasila wiuwiuwiu",
+  longDesc: "Vanilla sundae dengan cream toping boba, choco chips dan strawberry paste",
   stock: 5,
   price: 5000,
   src: BASE_DIR_IMAGE + "mixsuek.jpg"
 }, {
   name: "Smashed Chicken",
-  desc: "Makanan kebangsaan mahasiswa/i seantero negeri",
-  stock: 49,
+  desc: "Makanan yang sejam scroll g*food ujung-ujungnya juga ini",
+  longDesc: "Ayam geprek hot uhuy sambal bawang dengan timun dan tomat, level pedas request langsung ke kasir",
+  stock: 19,
   price: 12000,
   src: BASE_DIR_IMAGE + "smashed-chicken.png"
 }, {
   name: "Setarmas Hot Americano Gula Aren plus Troffle",
-  desc: "Minuman kopi pengguna nMac dan iSiteru",
+  desc: "Minuman kopi pengguna nMac dan iSiteru, mantappu jiwaaaaa",
+  longDesc: "Americano gula aren, diaduk clockwise 3 kali khusus kaum elit, ekspatriat, influencer, dan punya KTP jaksel. Kaum checkout nunggu diskon minggir dulu",
   stock: 13,
-  price: 31000,
+  price: 29800,
   src: BASE_DIR_IMAGE + "setarbak.jpg"
 }];
 
@@ -11734,7 +11747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#modal-product-img {\r\n    max-height: 300px;\r\n    max-width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10px;\n}\n#modal-product-desc {\r\n    text-align: center;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#productmodalcontent {\r\n    gap: 2rem;\n}\n#modal-product-img {\r\n    max-height: 300px;\r\n    max-width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10px;\n}\n#modal-product-desc {\r\n    text-align: left;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

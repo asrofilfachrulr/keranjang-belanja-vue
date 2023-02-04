@@ -1,11 +1,14 @@
 <template>
-    <div class="d-flex flex-column justify-content-center">
+    <div
+        class="d-flex flex-column justify-content-center"
+        id="productmodalcontent"
+    >
         <img
             id="modal-product-img"
             v-bind:src="bodyData.src"
             alt="image product"
         />
-        <p id="modal-product-desc">{{ bodyData.desc }}</p>
+        <p id="modal-product-desc" v-html="bodyData.desc"></p>
     </div>
 </template>
 
@@ -21,6 +24,9 @@ export default {
 </script>
 
 <style>
+#productmodalcontent {
+    gap: 2rem;
+}
 #modal-product-img {
     max-height: 300px;
     max-width: 100%;
@@ -29,6 +35,6 @@ export default {
 }
 
 #modal-product-desc {
-    text-align: center;
+    text-align: left;
 }
 </style>

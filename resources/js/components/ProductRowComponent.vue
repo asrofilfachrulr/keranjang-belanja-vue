@@ -20,7 +20,7 @@
         <centered-modal
             :bodyData="{
                 src: product.src,
-                desc: product.desc,
+                desc: product.longDesc,
             }"
             :componentProp="componentProp"
             :modalTitle="product.name"

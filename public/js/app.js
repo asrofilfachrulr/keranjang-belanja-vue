@@ -6222,7 +6222,8 @@ var render = function render() {
     attrs: {
       btnType: _vm.btnTypeCheckout,
       "data-bs-toggle": "modal",
-      "data-bs-target": "#" + _vm.checkoutModalId
+      "data-bs-target": "#" + _vm.checkoutModalId,
+      disabled: Object.keys(this.cartItems) <= 0
     },
     on: {
       click: _vm.checkoutHandleClick
@@ -6230,7 +6231,8 @@ var render = function render() {
   }), _vm._v(" "), _c("button-component", {
     staticClass: "ml-3",
     attrs: {
-      btnType: _vm.btnTypeClearAll
+      btnType: _vm.btnTypeClearAll,
+      disabled: Object.keys(this.cartItems) <= 0
     },
     on: {
       click: _vm.clearAllHandleClick

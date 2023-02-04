@@ -22,8 +22,10 @@
                 src: product.src,
                 desc: product.longDesc,
             }"
-            :componentProp="componentProp"
+            :componentBody="componentBody"
+            :componentFooter="componentFooter"
             :modalTitle="product.name"
+            :btnTypes="btnTypeModalFooter"
             :modalId="modalId"
         ></centered-modal>
     </div>
@@ -31,6 +33,7 @@
 
 <script>
 import ProductModalContent from "./ProductModalContent.vue";
+import ProductModalFooterVue from "./ProductModalFooter.vue";
 
 export default {
     props: {
@@ -50,7 +53,14 @@ export default {
                 text: "Add to cart",
                 type: "primary",
             },
-            componentProp: ProductModalContent,
+            btnTypeModalFooter: {
+                Close: {
+                    text: "Close",
+                    type: "secondary",
+                },
+            },
+            componentBody: ProductModalContent,
+            componentFooter: ProductModalFooterVue,
             modalId: this.product.name.replace(/\s/g, "") + "Modal",
         };
     },

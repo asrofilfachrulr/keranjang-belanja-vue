@@ -15,19 +15,16 @@
                 </div>
                 <div class="modal-body">
                     <component
-                        :is="componentProp"
+                        :is="componentBody"
                         :bodyData="bodyData"
                     ></component>
                 </div>
                 <div class="modal-footer">
-                    <button-component
-                        :btnType="btnTypeCancel"
-                        :data-bs-dismiss="'modal'"
-                    >
-                    </button-component>
-                    <button-component :btnType="btnTypeDone"
-                        >Done</button-component
-                    >
+                    <component
+                        :is="componentFooter"
+                        :footerData="footerData"
+                        :btnTypes="btnTypes"
+                    ></component>
                 </div>
             </div>
         </div>
@@ -44,26 +41,26 @@ export default {
             type: Object,
             default: () => {},
         },
+        footerData: {
+            type: Object,
+            required: false,
+        },
         modalTitle: {
             type: String,
             default: "",
         },
-        componentProp: {
+        componentBody: {
             type: Object,
             required: true,
         },
-    },
-    data: function () {
-        return {
-            btnTypeDone: {
-                text: "Done",
-                type: "success",
-            },
-            btnTypeCancel: {
-                text: "Cancel",
-                type: "secondary",
-            },
-        };
+        componentFooter: {
+            type: Object,
+            required: true,
+        },
+        btnTypes: {
+            type: Object,
+            required: true,
+        },
     },
 };
 </script>

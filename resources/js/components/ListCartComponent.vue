@@ -42,14 +42,17 @@
                 cartItems,
                 total,
             }"
-            :componentProp="componentProp"
+            :componentBody="componentBody"
+            :componentFooter="componentFooter"
             :modalTitle="'Checkout'"
+            :btnTypes="btnTypesModal"
         ></centered-modal>
     </div>
 </template>
 
 <script>
 import CheckoutModalContent from "./CheckoutModalContent.vue";
+import CheckoutModalFooterVue from "./CheckoutModalFooter.vue";
 
 export default {
     props: {
@@ -72,8 +75,19 @@ export default {
                 text: "Clear All",
                 type: "danger",
             },
-            componentProp: CheckoutModalContent,
+            componentBody: CheckoutModalContent,
+            componentFooter: CheckoutModalFooterVue,
             modalId: "checkoutModal",
+            btnTypesModal: {
+                Cancel: {
+                    text: "Cancel",
+                    type: "secondary",
+                },
+                Print: {
+                    text: "Print",
+                    type: "primary",
+                },
+            },
         };
     },
     methods: {

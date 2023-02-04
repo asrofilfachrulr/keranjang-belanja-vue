@@ -1,4 +1,4 @@
-const BASE_DIR_IMAGE = '/images/'
+const BASE_DIR_IMAGE = 'https://github.com/asrofilfachrulr/keranjang-belanja-vue/raw/main/public/images/'
 
 export const list = [
     {

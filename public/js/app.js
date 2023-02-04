@@ -6689,7 +6689,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "list": () => (/* binding */ list)
 /* harmony export */ });
-var BASE_DIR_IMAGE = '/images/';
+var BASE_DIR_IMAGE = 'https://github.com/asrofilfachrulr/keranjang-belanja-vue/raw/main/public/images/';
 var list = [{
   name: "Indomie Goreng Rendang",
   desc: "Masakan Instan Terenak di Dunia",

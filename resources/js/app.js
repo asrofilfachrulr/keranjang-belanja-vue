@@ -25,7 +25,9 @@ Vue.component('list-product-component', require('./components/ListProductCompone
 Vue.component('list-cart-component', require('./components/ListCartComponent.vue').default);
 Vue.component('product-row-component', require('./components/ProductRowComponent.vue').default);
 Vue.component('cart-row-component', require('./components/CartRowComponent.vue').default);
-Vue.component('checkout-modal-component', require('./components/CheckoutModalComponent.vue').default);
+Vue.component('centered-modal', require('./components/CenteredModal.vue').default);
+Vue.component('checkout-modal-content', require('./components/CheckoutModalContent.vue').default);
+Vue.component('product-modal-content', require('./components/ProductModalContent.vue').default);
 Vue.component('button-component', require('./components/ButtonComponent.vue').default);
 
 /**

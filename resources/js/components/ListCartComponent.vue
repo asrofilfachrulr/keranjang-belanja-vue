@@ -28,7 +28,7 @@
                 :btnType="btnTypeCheckout"
                 @click="checkoutHandleClick"
                 data-bs-toggle="modal"
-                data-bs-target="#checkoutModal"
+                :data-bs-target="'#' + modalId"
             ></button-component>
             <button-component
                 class="ml-3"
@@ -36,14 +36,21 @@
                 @click="clearAllHandleClick"
             ></button-component>
         </div>
-        <checkout-modal-component
-            :cartItems="cartItems"
-            :total="total"
-        ></checkout-modal-component>
+        <centered-modal
+            :modalId="modalId"
+            :bodyData="{
+                cartItems,
+                total,
+            }"
+            :componentProp="componentProp"
+            :modalTitle="'Checkout'"
+        ></centered-modal>
     </div>
 </template>
 
 <script>
+import CheckoutModalContent from "./CheckoutModalContent.vue";
+
 export default {
     props: {
         cartItems: {
@@ -65,6 +72,8 @@ export default {
                 text: "Clear All",
                 type: "danger",
             },
+            componentProp: CheckoutModalContent,
+            modalId: "checkoutModal",
         };
     },
     methods: {

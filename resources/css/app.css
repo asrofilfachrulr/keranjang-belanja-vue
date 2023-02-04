@@ -17,6 +17,15 @@ body {
     border: none;
 }
 
+.btn {
+    cursor: pointer;
+}
+
+.btn[disabled="disabled"] {
+    cursor: not-allowed !important;
+    pointer-events: unset;
+}
+
 .custom-table-title,
 .custom-total-row {
     font-weight: 600;
@@ -24,6 +33,10 @@ body {
 
 .custom-table-title {
     background-color: rgba(230, 230, 230, 0.5);
+}
+
+.border-none {
+    border: none;
 }
 
 /* hide the default scrollbar */

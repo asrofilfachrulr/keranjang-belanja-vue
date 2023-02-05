@@ -6,6 +6,15 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Hosting Github Page  
+
+[CLICK HERE](https://asrofilfachrulr.github.io/keranjang-belanja-vue/dist/) to go to the page
+
+### Excuses  
+
+Prior lack of my knowledge related to how to generate static file without any php because php cant be rendered by github page (tried many things also the mr. gpt told me so), I decided to generate it static files with pure Vue only. So I simply (not that simple tho) copied the component files and placed it to new vue project. I done something this and that to figured out why bootstrap is freaking not working as with laravel-mix also some Vue, Jquery and other external scripts invocation in component' script flagged as error. Other than that, alhamdulillah the page successfully be rendered, overall functionality is almost same, though there ARE much still anomalies with bootstrap (why bootstrap..), so there are few differences in design.
+
+
 ## Final Look
 
 ![Target](./ComponentLayout/Target.png)

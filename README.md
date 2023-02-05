@@ -6,9 +6,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Hosting Github Page  
+## Link Page
 
-[CLICK HERE](https://asrofilfachrulr.github.io/keranjang-belanja-vue/dist/) to go to the page
+[CLICK HERE](https://asrofilfachrulr.github.io/keranjang-belanja-vue/dist/) (github page) or [HERE](https://cart-vuejs.vercel.app/) (vercel) to go to the page
 
 
 ## Final Look

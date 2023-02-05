@@ -29,12 +29,12 @@
                 @click="checkoutHandleClick"
                 data-bs-toggle="modal"
                 :data-bs-target="'#' + checkoutModalId"
-                :disabled="Object.keys(this.cartItems) <= 0"
+                :disabled="Object.keys(this.cartItems).length <= 0"
             ></button-component>
             <button-component
                 class="ml-3"
                 :btnType="btnTypeClearAll"
-                :disabled="Object.keys(this.cartItems) <= 0"
+                :disabled="Object.keys(this.cartItems).length <= 0"
                 :class="'border-none'"
                 @click="clearAllHandleClick"
             ></button-component>

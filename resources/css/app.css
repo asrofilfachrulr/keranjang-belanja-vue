@@ -78,7 +78,7 @@ body {
 
 @media (max-width: 768px) {
     html {
-        font-size: 12px;
+        font-size: 13px;
     }
     .btn {
         margin-left: 0.5rem;
@@ -87,7 +87,7 @@ body {
     }
 
     .btn > svg {
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
     }
 }

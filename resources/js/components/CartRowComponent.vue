@@ -1,17 +1,18 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row d-flex flex-nowrap">
             <span class="col-3">{{ item.name }}</span>
             <span class="col-3">{{ item.qty }}</span>
             <span class="col-2">{{ item.price }}</span>
             <button-component
                 :btnType="btnTypeDelOne"
                 @click="delOneHandleClick"
-                class="mr-3"
+                :class="['col-auto', 'mr-2']"
             >
             </button-component>
             <button-component
                 :btnType="btnTypeDel"
+                :class="['col-auto', 'me-auto']"
                 :id="'delete-item'"
                 @click="delHandleClick"
             ></button-component>

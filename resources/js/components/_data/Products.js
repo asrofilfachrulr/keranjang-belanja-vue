@@ -50,7 +50,7 @@ export const list = [
         src: BASE_DIR_IMAGE + "smashed-chicken.png",
     },
     {
-        name: "Setarmas Hot Americano Gula Aren plus Troffle",
+        name: "Hot Americano Gula Aren",
         desc: "Minuman kopi pengguna nMac dan iSiteru, mantappu jiwaaaaa",
         longDesc: "Americano gula aren, diaduk clockwise 3 kali khusus kaum elit, ekspatriat, influencer, dan punya KTP jaksel. Kaum checkout nunggu diskon minggir dulu",
         stock: 13,

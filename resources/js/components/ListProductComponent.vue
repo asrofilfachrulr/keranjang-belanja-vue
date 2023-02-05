@@ -1,17 +1,19 @@
 <template>
-    <div id="list-product">
+    <div
+        id="list-product"
+        class="container-fluid mt-4 d-flex flex-column justify-content-start"
+    >
         <div class="row custom-row-title">
             <h2 class="col">{{ title }}</h2>
         </div>
-        <div class="row custom-table-title">
+        <div class="row d-flex flex-nowrap custom-table-title">
             <span class="col-3">Name</span>
-            <span class="col-5">Description</span>
-            <span class="col-1">Stock</span>
+            <span class="col-4">Description</span>
+            <span class="col-1" style="padding-left: 0">Stock</span>
             <span class="col-1">Price</span>
         </div>
         <div class="scrollable" id="list-product-content">
             <product-row-component
-                class="row"
                 v-for="(product, index) in products"
                 :key="index"
                 :product="product"

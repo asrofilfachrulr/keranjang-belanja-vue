@@ -37,4 +37,10 @@ export default {
 #modal-product-desc {
     text-align: left;
 }
+
+@media (max-width: 768px) {
+    #modal-product-img {
+        max-height: 225px;
+    }
+}
 </style>

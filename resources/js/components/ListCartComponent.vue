@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5">
+    <div class="container-fluid mt-5 d-flex flex-column justify-content-start">
         <div class="row custom-row-title">
             <h2>Keranjang Belanja</h2>
         </div>
@@ -23,8 +23,9 @@
             <span class="col-3">Rp. {{ total }}</span>
             <span class="col-3"></span>
         </div>
-        <div class="row row-no-border mt-3" style="z-index: -999">
+        <div class="row row-no-border mt-3">
             <button-component
+                :class="'col-auto'"
                 :btnType="btnTypeCheckout"
                 @click="checkoutHandleClick"
                 data-bs-toggle="modal"
@@ -32,10 +33,10 @@
                 :disabled="Object.keys(this.cartItems).length <= 0"
             ></button-component>
             <button-component
+                :class="['col-auto', 'border-none']"
                 class="ml-3"
                 :btnType="btnTypeClearAll"
                 :disabled="Object.keys(this.cartItems).length <= 0"
-                :class="'border-none'"
                 @click="clearAllHandleClick"
             ></button-component>
         </div>
